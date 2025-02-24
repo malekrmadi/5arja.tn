@@ -1,0 +1,32 @@
+<div class="chat-container">
+  <div class="chat-box">
+    <div class="chat-history">
+      <div *ngFor="let message of chatHistory" [ngClass]="message.sender">
+        <strong>{{ message.sender }}:</strong> {{ message.message }}
+        
+        <!-- Display SQL query if present -->
+        <div *ngIf="message.sqlQuery" class="sql-query">
+          <strong>SQL Query:</strong> {{ message.sqlQuery }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="loading">
+      <p>Bot is typing...</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <div class="chat-input">
+      <input
+        type="text"
+        [(ngModel)]="userMessage"
+        placeholder="Type your question..."
+        (keydown.enter)="sendMessage()"
+      />
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>

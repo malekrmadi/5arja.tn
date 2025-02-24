@@ -1,0 +1,56 @@
+<div class="container">
+    <h2>Ajouter un nouveau restaurant</h2>
+  
+    <form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nom">Nom du restaurant :</label>
+        <input id="nom" formControlName="nom" class="form-control" placeholder="Nom du restaurant" />
+        <div *ngIf="restaurantForm.controls['nom'].invalid && restaurantForm.controls['nom'].touched" class="text-danger">
+          Le nom du restaurant est requis.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Description :</label>
+        <textarea id="description" formControlName="description" class="form-control" placeholder="Description du restaurant"></textarea>
+        <div *ngIf="restaurantForm.controls['description'].invalid && restaurantForm.controls['description'].touched" class="text-danger">
+          La description est requise.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="heuresOuverture">Heures d'ouverture :</label>
+        <input id="heuresOuverture" formControlName="heuresouverture" class="form-control" placeholder="Heures d'ouverture" />
+        <div *ngIf="restaurantForm.controls['heuresOuverture'].invalid && restaurantForm.controls['heuresOuverture'].touched" class="text-danger">
+          Les heures d'ouverture sont requises.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="noteMoyenne">Note moyenne :</label>
+        <input id="noteMoyenne" formControlName="noteMoyenne" class="form-control" type="number" min="0" max="5" placeholder="Note moyenne" />
+        <div *ngIf="restaurantForm.controls['noteMoyenne'].invalid && restaurantForm.controls['notemoyenne'].touched" class="text-danger">
+          La note moyenne doit être entre 0 et 5.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="ville">Ville :</label>
+        <select id="ville" formControlName="villeid" class="form-control">
+          <option value="">Sélectionner une ville</option>
+          <option *ngFor="let ville of villes" [value]="ville.villeid">{{ ville.nom }}</option>
+        </select>
+        <div *ngIf="restaurantForm.get('villeid')?.invalid && restaurantForm.get('villeid')?.touched" class="text-danger">
+          La ville est requise.
+        </div>
+      </div>
+      
+      
+  
+      <button type="submit" class="btn btn-primary" [disabled]="restaurantForm.invalid">Ajouter Restaurant</button>
+    </form>
+  
+    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+  </div>
+  

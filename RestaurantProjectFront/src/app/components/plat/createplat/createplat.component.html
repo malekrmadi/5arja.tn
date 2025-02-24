@@ -1,0 +1,76 @@
+<div class="container">
+  <h2>Créer un Plat</h2>
+  
+  <!-- Affichage du message de confirmation -->
+  <div *ngIf="message" class="alert" [ngClass]="{'alert-success': message.includes('succès'), 'alert-danger': message.includes('Erreur')}">
+    {{ message }}
+  </div>
+  
+  <form [formGroup]="platForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group">
+      <label for="nom">Nom du Plat</label>
+      <input id="nom" formControlName="nom" class="form-control" placeholder="Nom du plat" />
+      <div *ngIf="platForm.get('nom')?.touched && platForm.get('nom')?.invalid" class="text-danger">
+        <small *ngIf="platForm.get('nom')?.errors?.['required']">Le nom est requis.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control" placeholder="Description du plat"></textarea>
+      <div *ngIf="platForm.get('description')?.touched && platForm.get('description')?.invalid" class="text-danger">
+        <small *ngIf="platForm.get('description')?.errors?.['required']">La description est requise.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="prix">Prix</label>
+      <input id="prix" formControlName="prix" class="form-control" type="number" placeholder="Prix" />
+      <div *ngIf="platForm.get('prix')?.touched && platForm.get('prix')?.invalid" class="text-danger">
+        <small *ngIf="platForm.get('prix')?.errors?.['required']">Le prix est requis.</small>
+        <small *ngIf="platForm.get('prix')?.errors?.['min']">Le prix doit être supérieur ou égal à 1.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="notemoyennesur10">Note Moyenne sur 10</label>
+      <input id="notemoyennesur10" formControlName="notemoyennesur10" class="form-control" type="number" placeholder="Note Moyenne" />
+      <div *ngIf="platForm.get('notemoyennesur10')?.touched && platForm.get('notemoyennesur10')?.invalid" class="text-danger">
+        <small *ngIf="platForm.get('notemoyennesur10')?.errors?.['required']">La note moyenne est requise.</small>
+        <small *ngIf="platForm.get('notemoyennesur10')?.errors?.['min']">La note doit être au moins 1.</small>
+        <small *ngIf="platForm.get('notemoyennesur10')?.errors?.['max']">La note ne peut pas dépasser 10.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="imageUrl">URL de l'image</label>
+      <input id="imageUrl" formControlName="imageUrl" class="form-control" type="url" placeholder="URL de l'image" />
+      <div *ngIf="platForm.get('imageUrl')?.touched && platForm.get('imageUrl')?.invalid" class="text-danger">
+        <small *ngIf="platForm.get('imageUrl')?.errors?.['required']">L'URL de l'image est requise.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="restaurantid">Restaurant</label>
+      <select id="restaurantid" formControlName="restaurantid" class="form-control">
+        <option *ngFor="let restaurant of restaurants" [value]="restaurant.restaurantid">{{ restaurant.nom }}</option>
+      </select>
+      <div *ngIf="platForm.get('restaurantid')?.touched && platForm.get('restaurantid')?.invalid" class="text-danger">
+        <small *ngIf="platForm.get('restaurantid')?.errors?.['required']">Le restaurant est requis.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="categorieplatid">Catégorie</label>
+      <select id="categorieplatid" formControlName="categorieplatid" class="form-control">
+        <option *ngFor="let categorie of categories" [value]="categorie.categorieplatid">{{ categorie.nom }}</option>
+      </select>
+      <div *ngIf="platForm.get('categorieplatid')?.touched && platForm.get('categorieplatid')?.invalid" class="text-danger">
+        <small *ngIf="platForm.get('categorieplatid')?.errors?.['required']">La catégorie est requise.</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="platForm.invalid">Créer</button>
+  </form>
+</div>

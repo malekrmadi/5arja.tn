@@ -1,0 +1,47 @@
+<div class="container">
+    <h2>Créer une Catégorie de Plat</h2>
+    
+    <!-- Afficher le message de succès -->
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+    
+    <!-- Afficher le message d'erreur -->
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  
+    <form [formGroup]="categoriePlatForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input id="nom" formControlName="nom" class="form-control" placeholder="Entrez le nom" />
+        <div *ngIf="categoriePlatForm.get('nom')?.invalid && categoriePlatForm.get('nom')?.touched" class="text-danger">
+          Le nom est requis.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select id="type" formControlName="type" class="form-control">
+          <option value="">Sélectionnez un type</option>
+          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+        </select>
+        <div *ngIf="categoriePlatForm.get('type')?.invalid && categoriePlatForm.get('type')?.touched" class="text-danger">
+          Le type est requis.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="nationalite">Nationalité</label>
+        <input id="nationalite" formControlName="nationalite" class="form-control" placeholder="Entrez la nationalité" />
+        <div *ngIf="categoriePlatForm.get('nationalite')?.invalid && categoriePlatForm.get('nationalite')?.touched" class="text-danger">
+          La nationalité est requise.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="categoriePlatForm.invalid">
+        Créer
+      </button>
+    </form>
+  </div>
+  

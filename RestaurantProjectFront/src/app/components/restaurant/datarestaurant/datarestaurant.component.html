@@ -1,0 +1,29 @@
+<div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Opening Hours</th>
+          <th>Average Rating</th>
+          <th>City</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let restaurant of restaurants">
+          <td>{{ restaurant.restaurantid }}</td>
+          <td>{{ restaurant.nom }}</td>
+          <td>{{ restaurant.description }}</td>
+          <td>{{ restaurant.heuresouverture }}</td>
+          <td>{{ restaurant.notemoyenne }}</td>
+          <td>{{ restaurant.villeid }}</td>
+          <td>
+            <button (click)="deleteRestaurant(restaurant.restaurantid)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

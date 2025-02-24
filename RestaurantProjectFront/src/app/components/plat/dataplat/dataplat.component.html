@@ -1,0 +1,35 @@
+<div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Average Rating (out of 10)</th>
+          <th>Category</th>
+          <th>Restaurant</th>
+          <th>Image</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plat of plats">
+          <td>{{ plat.platid }}</td>
+          <td>{{ plat.nom }}</td>
+          <td>{{ plat.description }}</td>
+          <td>{{ plat.prix | currency }}</td>
+          <td>{{ plat.notemoyennesur10 }}</td>
+          <td>{{ plat.categorieplatid }}</td>
+          <td>{{ plat.restaurantid }}</td>
+          <td>
+            <img *ngIf="plat.imageUrl" [src]="plat.imageUrl" alt="{{ plat.nom }}" class="plat-image"/>
+          </td>
+          <td>
+            <button (click)="deletePlat(plat.platid)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

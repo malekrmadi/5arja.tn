@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>Create a New Ville</h2>
+  
+    <form [formGroup]="villeForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nom">Ville Name:</label>
+        <input id="nom" formControlName="nom" class="form-control" placeholder="Enter Ville Name" />
+        <div *ngIf="villeForm.controls['nom'].invalid && villeForm.controls['nom'].touched" class="text-danger">
+          Ville Name is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="gouvernorat">Gouvernorat:</label>
+        <select id="gouvernorat" formControlName="gouvernorat" class="form-control">
+          <option value="">Select Gouvernorat</option>
+          <option *ngFor="let gouvernorat of gouvernorats" [value]="gouvernorat">{{ gouvernorat }}</option>
+        </select>
+        <div *ngIf="villeForm.controls['gouvernorat'].invalid && villeForm.controls['gouvernorat'].touched" class="text-danger">
+          Gouvernorat is required.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="villeForm.invalid">Add Ville</button>
+    </form>
+  
+    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+  </div>
+  

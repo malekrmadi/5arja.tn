@@ -1,0 +1,25 @@
+<div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Nationality</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let categoriePlat of categoriePlats">
+          <td>{{ categoriePlat.categorieplatid }}</td>
+          <td>{{ categoriePlat.nom }}</td>
+          <td>{{ categoriePlat.type }}</td>
+          <td>{{ categoriePlat.nationalite || 'N/A' }}</td>
+          <td>
+            <button (click)="deleteCategoriePlat(categoriePlat.categorieplatid)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
